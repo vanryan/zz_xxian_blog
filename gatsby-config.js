@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    url: 'https://lumen.netlify.com',
-    title: 'Blog by John Doe',
-    subtitle: 'Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.',
+    url: 'https://zzxxian.netlify.com',
+    title: 'Shane Z\'s Personal Blog',
+    subtitle: 'Traceur',
     copyright: '© All rights reserved.',
     disqusShortname: '',
     menu: [
@@ -17,10 +17,13 @@ module.exports = {
       {
         label: 'Contact me',
         path: '/contact/'
+      }, {
+        label: 'Old Blog',
+        path: '/old-blog/'
       }
     ],
     author: {
-      name: 'John Doe',
+      name: 'Shane Z',
       email: '#',
       telegram: '#',
       twitter: '#',
