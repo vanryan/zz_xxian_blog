@@ -1,6 +1,6 @@
 ---
 title: 《红死病》与恐惧 Red Death & Terror
-date: "2018-09-16T22:46:37.121Z"
+date: "2018-09-16T22:56:32.121Z"
 layout: post
 draft: false
 path: "/posts/red-death/"
@@ -10,10 +10,12 @@ tags:
   - "Literature"
   - "Terror"
   - "Cognition"
+  - "Suspense"
+  - "AllanPoe"
 description: "All that we see or seem is but a dream within a dream. -- Edgar Allan Poe, 1809 - 1849"
 ---
 
->"All that we see or seem is but a dream within a dream." -- 爱伦・坡 （Edgar Allan Poe, 1809 - 1849）
+>"All that we see or seem is but a dream within a dream" -- 爱伦・坡 （Edgar Allan Poe, 1809 - 1849）
 
 阅读中，我偶而会停下，回想自己为什么在看这本书，抑或是，我有没有继续读下去的理由。
 
@@ -59,29 +61,32 @@ description: "All that we see or seem is but a dream within a dream. -- Edgar Al
 
 看过DC漫画的朋友们可能会知道所罗门·格兰迪（Solomon Grundy）这个角色。他是一个力量可以与超人比肩的行尸走肉，而他的灵感则来源于一个英国童谣"Solomon Grundy"：
 
->Solomon Grundy,
-Born on a Monday,
-Christened on Tuesday,
-Married on Wednesday,
-Took ill on Thursday,
-Worse on Friday,
-Died on Saturday,
-Buried on Sunday.
-This is the end
-Of Solomon Grundy.
+>Solomon Grundy,<br/>
+>Born on a Monday,<br/>
+>Christened on Tuesday,<br/>
+>Married on Wednesday,<br/>
+>Took ill on Thursday,<br/>
+>Worse on Friday,<br/>
+>Died on Saturday,<br/>
+>Buried on Sunday.<br/>
+>This is the end<br/>
+>Of Solomon Grundy.<br/>
 
 翻译即是：
 
->所罗门格兰迪
-星期一出生
-星期二受洗
-星期三结婚
-星期四染疾
-星期五病危
-星期六去世
-星期天下葬
-这就是
-所罗门格兰迪的终场
+>所罗门格兰迪<br/>
+星期一出生<br/>
+星期二受洗<br/>
+星期三结婚<br/>
+星期四染疾<br/>
+星期五病危<br/>
+星期六去世<br/>
+星期天下葬<br/>
+这就是<br/>
+所罗门格兰迪的终场<br/>
+
+![Solomon Grundy](https://upload-images.jianshu.io/upload_images/72299-6f73575a295e7e74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 这首诡异的童谣出自于著名的《鹅妈妈童谣》("Mother Goose")，除了"Solomon Grundy"，它还有《谁杀死了知更鸟》("Who killed Cock Robin ")，《十个小黑人》（阿加莎《无人生还》）和《三只瞎老鼠等》（阿加莎《捕鼠器》）等在通俗文化中常见的篇目。《红死病》中步步紧逼的“死神”和在第七间终结的情节，正巧符合《所罗门格兰迪》。当然我这番说辞也未必不是过度解读。但这《红死病》的这一情节和舞台，影影绰绰地裹带着扑朔迷离的或沉重或诡谲的文化因子，着实是更为作品蒙上了一层恐怖奇幻的色彩。
 
@@ -106,6 +111,9 @@ Of Solomon Grundy.
 ![紫色](https://upload-images.jianshu.io/upload_images/72299-f750d488f48b13e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![紫罗兰色](https://upload-images.jianshu.io/upload_images/72299-43ab67ba0340b0f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+
 
 
 
