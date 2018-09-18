@@ -18,16 +18,16 @@ module.exports = {
         label: 'Contact me',
         path: '/contact/'
       }, {
-        label: 'Old Blog',
-        path: '/old-blog/'
+        label: 'Other Blogs',
+        path: '/other-blogs/'
       }
     ],
     author: {
       name: 'Shane Z',
       email: '#',
-      telegram: '#',
-      twitter: '#',
-      github: '#',
+      telegram: 'shanezx',
+      twitter: 'freenik2_vr',
+      github: 'vanryan',
       rss: '#',
       vk: '#'
     }
