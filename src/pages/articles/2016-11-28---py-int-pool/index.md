@@ -31,7 +31,7 @@ description: "Python里面，整数对象的头文件intobject.h，也可以在I
 
 打开Python源码目录的`Include/`，可以找到*object.h*这一文件，这一个文件，是整个Python对象机制的基础。搜索`PyObject`，我们将会找到：
 
-```
+```c
 typedef struct _object {
 	PyObject_HEAD
 } PyObject;
@@ -39,7 +39,7 @@ typedef struct _object {
 
 再看看PyObject_HEAD这个宏:
 
-```
+```c
 #define PyObject_HEAD			\
 	_PyObject_HEAD_EXTRA		\
 	Py_ssize_t ob_refcnt;		\
@@ -50,7 +50,7 @@ typedef struct _object {
 ## Python中的整数对象
 
 Python里面，整数对象的头文件*intobject.h*，也可以在`Include/`目录里找到，这一文件定义了`PyIntObject`这一结构体作为Python中的整数对象：
-```
+```c
 typedef struct {
     PyObject_HEAD
     long ob_ival;
@@ -59,7 +59,7 @@ typedef struct {
 
 上面提过了，每一个Python对象的`ob_type`都指向一个类型对象，这里`PyIntObject`则指向`PyInt_Type`。想要了解`PyInt_Type`的相关信息，我们可以打开`intobject.c`，并找到如下内容：
 
-```
+```c
 PyTypeObject PyInt_Type = {
 	PyObject_HEAD_INIT(&PyType_Type)
 	0,
@@ -113,7 +113,7 @@ Python里面，对象的创建一般是通过Python的C API或者是其类型对
 整数对象大概会是常见Python程序中使用最频繁的对象了。并且，正如上面提到过的，Python的一切皆对象而且对象都生存在系统的堆上，整数对象当然不例外，那么以整数对象的使用频度，系统堆将面临难以想象的高频的访问。一些简单的循环和计算，都会致使malloc和free一次次被调用，由此带来的开销是难以计数的。此外，heap也会有很多的fragmentation的情况，进一步导致性能下降。
 
 这也是为什么通用整数对象池机制在Python中得到了应用。这里需要说明的是，“小”的整数对象，将全部直接放置于内存中。怎么样定义“小”呢？继续看`intobject.c`，我们可以看到：
-```
+```c
 #ifndef NSMALLPOSINTS
 #define NSMALLPOSINTS           257
 #endif
@@ -133,7 +133,7 @@ static PyIntObject *small_ints[NSMALLNEGINTS + NSMALLPOSINTS];
 与小整数相对的是“大”整数对象，也就是除开小整数对象之外的其他整数对象。既然不可能再缓存所有，或者说大部分常用范围的整数，那么一个妥协的办法就是提供一片空间让这些大整数对象按需依次使用。Python也正是这么做的。它维护了两个单向链表`block_list`和`free_list`。前者保存了许多被称为`PyIntBlock`的结构，用于存储被使用的大整数的`PyIntObject`；后者则用于维护前者所有block之中的空闲内存。
 
 仍旧是在`intobject.c`之中，我们可以看到：
-```
+```c
 struct _intblock {
     struct _intblock *next;
     PyIntObject objects[N_INTOBJECTS];
@@ -153,7 +153,7 @@ So far so good. 上述的机制可以很好减轻fragmentation的问题，同时
 
 小整数对象自是不必担心，始终都是在内存中的；大整数对象则需要调用析构操作，`int_dealloc` （`intobject.c`）:
 
-```
+```c
 static void
 int_dealloc(PyIntObject *v)
 {
@@ -167,7 +167,7 @@ int_dealloc(PyIntObject *v)
 ```
 
 这个`PyInt_CheckExact`，来自于`intobject.h`：
-```
+```c
 #define PyInt_CheckExact(op) ((op)->ob_type == &PyInt_Type)
 ```
 它起到了类型检查的作用。所以如果这个指针`v`指向的不是Python原生整数对象，则`int_dealloc`直接调用该类型的`tp_free`操作；否则把不再需要的那块内存放入`free_list`之中。
@@ -180,7 +180,7 @@ int_dealloc(PyIntObject *v)
 
 下面做个实验。以下程序运行在Macbook Pro (mid 2015), 2.5Ghz i7, 16 GB Memory，Python 2.7.11的环境下：
 
-```
+```c
 l = list()
 num = 178956971
 
@@ -202,7 +202,7 @@ for i in range(0, num):
 讲道理，24 bytes x 178956971 = 4294967304 bytes，约等于2^32，也就是4GB，那么为什么会占用5.44GB呢？
 
 这并非程序其他部分的overhead，因为，就算你的程序只含有：
-```
+```c
 for i in range(0, 178956971):
 	pass
 ```

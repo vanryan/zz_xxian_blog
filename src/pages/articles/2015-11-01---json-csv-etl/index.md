@@ -36,11 +36,15 @@ description: "How to ETL -- JSON, Text, XML, CSV"
 
 举个例子，要处理的Text文件或者CSV文件是以`\t`作为分隔符的，每行有id, name, balance这么三个数据域，那么首先我们需要在数据库中创建这个表：
 
-`CREATE TABLE sometable(id INT, name VARCHAR(255), balance DECIMAL(8,4));`
+```sql
+CREATE TABLE sometable(id INT, name VARCHAR(255), balance DECIMAL(8,4));
+```
 
 创建成功以后就可以导入了。操作方式很简单：
 
-`LOAD DATA LOCAL INFILE '你的文件路径（如~/file.csv）'  INTO TABLE sometable FIELDS TERMINATED BY '\t' [ENCLOSED BY '"'(可选)] LINES TERMINATED BY '\n' (id, name, balance)`
+```sql
+LOAD DATA LOCAL INFILE '你的文件路径（如~/file.csv）'  INTO TABLE sometable FIELDS TERMINATED BY '\t' [ENCLOSED BY '"'(可选)] LINES TERMINATED BY '\n' (id, name, balance)
+```
 
 这里要注意的是，我们需要开启**local-infile**这个MySQL的配置参数，才能够成功导入。究其原因，从MySQL的Manual中可以看到这么一段话：
 
@@ -52,7 +56,9 @@ description: "How to ETL -- JSON, Text, XML, CSV"
 
 抑或是在命令行启动MySQL时加上**--local-infile**这一项：
 
-`mysql --local-infile -uroot -pyourpwd yourdbname`
+```bash
+mysql --local-infile -uroot -pyourpwd yourdbname
+```
 
 此外，我们也可以使用MySQL的一个官方导入程序[**mysqlimport** ](http://dev.mysql.com/doc/refman/5.7/en/mysqlimport.html)，这个程序本质上就是为LOAD DATA FILE提供了一个命令行的interface，很容易理解，我们这里就不再详述。
 
@@ -60,7 +66,7 @@ description: "How to ETL -- JSON, Text, XML, CSV"
 这件事的完成方式，与我们的XML的形式有着很大的关系。
 
 举个例子说，当你的XML数据文件有着很非常规范的格式，比如：
-
+```xml
     <?xml version="1.0"?>
       <row>
         <field name="id">1</field>
@@ -73,27 +79,27 @@ description: "How to ETL -- JSON, Text, XML, CSV"
         <field name="name">Niki</field>
         <field name="balance">1289.2333</field>
       </row>
-
+```
 或者
-
+```xml
     <row column1="value1" column2="value2" .../>
-
+```
 我们就可以很方便使用`LOAD XML`来导入，这里可以参见MySQL的官方手册--[LOAD XML Syntax](https://dev.mysql.com/doc/refman/5.5/en/load-xml.html)。
 
 然而我们可能有另外一些需求，比如说，我们可能会想要将XML文件的域映射到不同名字的列(TABLE COLUMN)之中。这里要注意，MySQL v5.0.7以后，MySQL的Stored Procedure中不能再运行`LOAD XML INFILE` 或者`LOAD DATA INFILE`。所以转换的程序(procedure)的编写方式与在此之前有所不同。这里，我们需要使用` Load_File()`和`ExtractValue()`这两个函数。
 
 以下是一个示例XML文件和程序：
 文件：
-
+```xml
     <?xml version="1.0"?>
 	<some_list>
 	  <someone id="1" fname="Rob" lname="Gravelle"/>
 	  <someone id="2" fname="Al" lname="Bundy"/>
 	  <someone id="3" fname="Little" lname="Richard"/>
 	</some_list>
-
+```
 程序：
-
+```sql
     DELIMITER $$
     CREATE DEFINER=`root`@`localhost` PROCEDURE `import_some_xml`(path varchar(255), node varchar(255))
     BEGIN
@@ -118,7 +124,7 @@ description: "How to ETL -- JSON, Text, XML, CSV"
             );
         end while;
     END
-
+```
 在MySQL中，使用它进行导入：
 
 `call import_some_xml('你的XML文件路径', '/some_list/someone');`
@@ -131,12 +137,12 @@ description: "How to ETL -- JSON, Text, XML, CSV"
 如何将JSON文件导入MySQL中，是一个很有趣的话题。JSON是一种现在相当常用的文件结构，所以掌握它的导入具有比较广泛的意义。
 
 很多时候，我们处理的JSON数据是以如下形式出现的：
-
+```json
 	{"name":"Julia","gender":"female"}
 	{"name":"Alice","gender":"female"}
 	{"name":"Bob","gender":"male"}
 	{"name":"Julian","gender":"male"}
-
+```
 而并不是规整的`[{},{},{},{}]`（一些NoSQL数据库的Export）。
 
 这样的形势对于载入有一个好处：因为每一行是一个JSON Object，所以我们便可以按行处理此文件，而不需要因为JSON的严格结构将整个文件（比如一个许多G的.json文件）全部载入。
@@ -145,18 +151,18 @@ description: "How to ETL -- JSON, Text, XML, CSV"
 [common-schema](https://code.google.com/p/common-schema/)是一个应用很广泛的MySQL的框架，它有着很丰富的功能和详细的[文档](http://common-schema.googlecode.com/svn/trunk/common_schema/doc/html/introduction.html)。我们可以使用它的JSON解析的功能。（它还具有JSON转换成XML等等方便的功能）
 
 具体说来，将common-schema导入之后，使用它的`extract_json_value`函数即可。源码中：
-
+```sql
 	create function extract_json_value(
 	    json_text text charset utf8,
 	    xpath text charset utf8
 	) returns text charset utf8
-
+```
 该函数接受两个参数，一个是json_text，表示json文件的内容，另一个是xpath，表示数据的结构（这里可以类比XML文件的处理）。很多读者应该知道，[XPath](https://developer.mozilla.org/en-US/docs/Web/XPath)是用来对XML中的元素进行定位的，这里也可以作一样的理解。
 
 以本段开始的几行JSON为例，这里common-schema的使用如下例：
-
+```sql
 	select common_schema.extract_json_value(f.event_data,'/name') as name, common_schema.extract_json_value(f.event_data,'/gender') as gender, sum(f.event_count) as event_count from json_event_fact f group by name, gender;
-
+```
 关于event_data，我们需要先理解LOAD DATA INFILE是一个[event](https://dev.mysql.com/doc/internals/en/load-data-infile-events.html)，不同的event type对应不同的event data。这部分知识可以参看[Event Data for Specific Event Types](https://dev.mysql.com/doc/internals/en/event-data-for-specific-event-types.html)
 
 如果感兴趣，可以参看其[源码](https://common-schema.googlecode.com/files/common_schema-2.2.sql)。参看一个受到广泛使用的项目的源码，对于自身成长是很有益的。

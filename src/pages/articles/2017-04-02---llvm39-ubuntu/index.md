@@ -71,6 +71,7 @@ make
 
 然后解压，编译和安装即可
 
+
 ```
 tar xzf Python-2.7.13.tgz
 cd Python-2.7.13
