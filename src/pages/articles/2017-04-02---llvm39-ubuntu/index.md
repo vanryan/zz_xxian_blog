@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/llvm39-ubuntu/"
 category: "compiler"
+collection: "technical"
 tags:
   - "LLVM"
   - "Debian"

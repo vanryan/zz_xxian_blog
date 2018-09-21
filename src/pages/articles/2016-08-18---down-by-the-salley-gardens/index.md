@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/down-by-the-salley-gardens/"
 category: "critics"
+collection: "misc"
 tags:
   - "Literature"
   - "English"

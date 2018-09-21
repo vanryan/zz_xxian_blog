@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/red-death/"
 category: "critics"
+collection: "misc"
 tags:
   - "Fiction"
   - "Literature"

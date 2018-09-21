@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/python-int-pool/"
 category: "programming-lang"
+collection: "technical"
 tags:
   - "Python"
   - "Internal"

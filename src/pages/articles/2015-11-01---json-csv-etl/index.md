@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/json-csv-etl/"
 category: "bigdata"
+collection: "technical"
 tags:
   - "BigData"
   - "ETL"

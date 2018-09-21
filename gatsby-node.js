@@ -13,6 +13,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     const pageTemplate = path.resolve('./src/templates/page-template.jsx');
     const tagTemplate = path.resolve('./src/templates/tag-template.jsx');
     const categoryTemplate = path.resolve('./src/templates/category-template.jsx');
+    const collectionTemplate = path.resolve('./src/templates/collection-template.jsx');
 
     graphql(`
     {
@@ -29,6 +30,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               tags
               layout
               category
+              collection
             }
           }
         }
@@ -81,6 +83,16 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               path: categoryPath,
               component: categoryTemplate,
               context: { category }
+            });
+          });
+
+          const collections = ['technical', 'misc'];
+          _.each(collections, (collection) => {
+            const collectionPath = `/collections/${_.kebabCase(collection)}`;
+            createPage({
+              path: collectionPath,
+              component: collectionTemplate,
+              context: { collection }
             });
           });
         }

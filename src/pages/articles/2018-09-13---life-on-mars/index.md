@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/life-on-mars/"
 category: "critics"
+collection: "misc"
 tags:
   - "Dramas"
   - "Movies"

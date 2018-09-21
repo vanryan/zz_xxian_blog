@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/aspirated-consonants/"
 category: "gengo"
+collection: "misc"
 tags:
   - "Language"
   - "Japanese"

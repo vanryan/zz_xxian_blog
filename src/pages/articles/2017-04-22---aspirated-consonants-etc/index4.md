@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/why-we-have-accents/"
 category: "gengo"
+collection: "misc"
 tags:
   - "Language"
   - "Japanese"

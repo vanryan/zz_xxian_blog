@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/jp-kotowaza-001/"
 category: "gengo"
+collection: "misc"
 tags:
   - "Language"
   - "Japanese"

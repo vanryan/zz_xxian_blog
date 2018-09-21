@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/korean-plain-tense-aspirated/"
 category: "gengo"
+collection: "misc"
 tags:
   - "Language"
   - "Phonetics"

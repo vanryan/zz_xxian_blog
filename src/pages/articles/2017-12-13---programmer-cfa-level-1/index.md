@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/programmer-cfa-level-1/"
 category: "methodology"
+collection: "misc"
 tags:
   - "CFA"
   - "Finance"

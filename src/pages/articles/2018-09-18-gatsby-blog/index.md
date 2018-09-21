@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/gatsby-blog/"
 category: "frontend"
+collection: "technical"
 tags:
   - "Blog"
   - "React"

@@ -5,6 +5,7 @@ layout: post
 draft: false
 path: "/posts/what-is-a-phone/"
 category: "gengo"
+collection: "misc"
 tags:
   - "Language"
   - "Japanese"
