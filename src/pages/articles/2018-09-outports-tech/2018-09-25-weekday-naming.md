@@ -13,7 +13,7 @@ tags:
     - "French"
     - "Korean"
     - "English"
-description: "如何增加网络吞吐量：1500 MTU seems too small, let us sextuple it!"
+description: "Lundi, Mardi, Mercredi, Jeudi... Oh là là, TGIF!"
 ---
 
 我一直觉得中文对星期几的表述非常直白：一个单纯的数字序列（除了星期天），就直接表述了一周每天的名称和序号，而不像其他许多语言中，每个weekday的名字是名字，不含有序号，所以思考这是一周中第几天时，还需要有这样一个比如Tuesday --> 3rd day (美国)的符号转化。
